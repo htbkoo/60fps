@@ -24,7 +24,7 @@
       will-change: transform;
     }
 
-    body.toggled main .box-container .box:nth-child(2n) {
+    .box--toggled {
       background: #777 !important;
     }
 
@@ -39,6 +39,7 @@
     }
 
     </style>
+    <!--<script src="recalcStyles-grader.js"></script>-->
   </head>
 
   <body>
@@ -67,7 +68,11 @@
 
     function styleSwapper() {
       console.log("start: " + window.performance.now());
-      document.body.classList.toggle('toggled');
+      // document.body.classList.toggle('toggled');
+      Array.from(document.body.querySelectorAll(".box"))
+              .filter((_,i) => i%2 !== 0)
+              .forEach(el => el.classList.toggle('box--toggled'));
+
       // DO NOT REMOVE THIS LINE (or the test will automatically pass)
       // it forces the browser to wait until the recalc event ends before finishing the function
       window.getComputedStyle(document.querySelector('div')).backgroundColor;
